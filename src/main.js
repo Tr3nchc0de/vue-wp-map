@@ -4,7 +4,7 @@ import App from "./App.vue";
 import router from "./router";
 import utils from "./mixins/utils";
 import store from "./store";
-import * as VueGoogleMaps from 'vue2-google-maps'
+import * as VueGoogleMaps from 'vue2-google-maps';
  
 
 Vue.mixin(utils);
