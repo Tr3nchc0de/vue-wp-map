@@ -10,7 +10,6 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.mixin(utils);
 
 
-
 //-- Initialize Google Analytics tracking.
 Vue.use(VueAnalytics, {
   id: GA_TRACKING_ID,
