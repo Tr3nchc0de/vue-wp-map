@@ -5,7 +5,9 @@ import router from "./router";
 import utils from "./mixins/utils";
 import store from "./store";
 import * as VueGoogleMaps from 'vue2-google-maps';
- 
+import wb from "./registerServiceWorker";
+Vue.prototype.$workbox = wb;
+
 
 Vue.mixin(utils);
 
@@ -48,3 +50,5 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount("#app");
+
+

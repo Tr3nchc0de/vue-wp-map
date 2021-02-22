@@ -9,6 +9,14 @@ const CONSTANTS = {
 };
 
 module.exports = {
+  pwa: {
+    themeColor: "#42b983",
+    msTileColor: "#42b983",
+    appleMobileWebAppCache: "yes",
+    manifestOptions: {
+      background_color: "#42b983"
+    }
+  },
   pluginOptions: {
     "style-resources-loader": {
       preProcessor: "scss",
@@ -19,6 +27,7 @@ module.exports = {
     }
   },
   configureWebpack: {
-    plugins: [new webpack.DefinePlugin(CONSTANTS)]
+    plugins: [new webpack.DefinePlugin(CONSTANTS)],
+    
   }
 };

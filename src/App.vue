@@ -36,7 +36,6 @@
 
   export default {
     name: 'App',
-
     data () {
       return {
         error: '',
@@ -49,6 +48,14 @@
     },
 
     created: function () {
+
+      if (this.$workbox) {
+        this.$workbox.addEventListener("waiting", () => {
+          this.showUpdateUI = true;
+        });
+      }
+
+      
 
       this.assignEndpointFromURL();
 
@@ -88,7 +95,12 @@
         if(!endpoint) return;
 
         this.$store.commit('updateEndpoint', endpoint);
-      }
+      },
+
+      async accept() {
+  this.showUpdateUI = false;
+  await this.$workbox.messageSW({ type: "SKIP_WAITING" });
+    }
     },
 
     components: {
@@ -96,7 +108,7 @@
       Loading,
       Updater,
       TopBar
-    }
+    },
   }
 </script>
 

@@ -5,5 +5,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "https://vue-wp-map.netlify.app"
+  to = "/index.html"
   status = 200
