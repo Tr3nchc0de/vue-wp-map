@@ -99,7 +99,7 @@ export default {
   }
 
   span {
-    color: $salmon;
+    color: $green;
     display: inline-block;
     margin-bottom: 1rem;
   }

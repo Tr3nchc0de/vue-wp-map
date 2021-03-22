@@ -19,16 +19,16 @@ $small-spacing: $base-spacing / 2;
 
 // Colors
 $white: #ffffff;
-$blue: #1565c0;
+$green: #104239;
 $gray: #333;
 $gray--medium: #999;
 $gray--mediumLight: lighten($gray--medium, 25%);
 $gray--light: #fafafa;
-$salmon: #E56B70;
+
 
 // Font Colors
 $base-font-color: $gray;
-$action-color: $salmon;
+$action-color: $green;
 
 // Border
 $base-border-color: $gray--light;

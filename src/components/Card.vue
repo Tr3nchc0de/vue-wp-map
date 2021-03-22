@@ -73,7 +73,7 @@ export default {
       color: inherit;
 
       &:hover {
-        color: $salmon;
+        color: $green;
       }
 
       &:focus {

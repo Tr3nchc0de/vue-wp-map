@@ -1,14 +1,33 @@
 <template>
   <nav>
-    <h1>
+    <div class="navbar-brand">
       <router-link
         :to="{
           name: 'home'
         }"
       >
-        WP Vue
+        <img src="img/icons/logo-pug.png">
       </router-link>
-    </h1>
+    </div>
+    <ul class="navbar">
+      <li><router-link
+        :to="{
+          name: 'posts'
+        }"
+      >
+      <div class="nav-item">Home</div>
+      </router-link>
+      </li>
+      <li>
+      <router-link
+        :to="{
+          name: ''
+        }"
+      >
+      <div class="nav-item">Suche</div>
+      </router-link>
+      </li>
+    </ul>
 
     <div>
       <!-- <p>
@@ -53,6 +72,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.navbar-brand {
+    max-width: 80px;
+}
 nav {
   display: flex;
   flex-direction: column;
