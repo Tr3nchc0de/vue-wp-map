@@ -5,11 +5,15 @@ import router from "./router";
 import utils from "./mixins/utils";
 import store from "./store";
 import * as VueGoogleMaps from 'vue2-google-maps';
+import './registerServiceWorker'
 import wb from "./registerServiceWorker";
 Vue.prototype.$workbox = wb;
 
 
 Vue.mixin(utils);
+
+
+
 
 
 //-- Initialize Google Analytics tracking.

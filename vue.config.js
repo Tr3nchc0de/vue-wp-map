@@ -9,7 +9,12 @@ const CONSTANTS = {
 };
 
 module.exports = {
+  runtimeCompiler: true,
   pwa: {
+    workboxPluginMode: "InjectManifest",
+    workboxOptions:{
+      swSrc: "src/service-worker.js"
+    },
     themeColor: "#42b983",
     msTileColor: "#42b983",
     appleMobileWebAppCache: "yes",
