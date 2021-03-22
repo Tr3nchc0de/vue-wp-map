@@ -1,4 +1,3 @@
-
 {
     "name":"vue-pwa-headless",
     "short_name":"vue-pwa-headless",
@@ -24,7 +23,14 @@
         }],
     "start_url":".",
     "display":"standalone",
-    "background_color":"#000000"
+    "background_color":"#000000",
+    "prefer_related_applications": true,
+    "related_applications": [
+    {
+        "platform": "play",
+        "id": "com.google.samples.apps.iosched"
+    }
+    ]
 }
 
 
