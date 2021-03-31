@@ -6,7 +6,7 @@
           name: 'home'
         }"
       >
-        <img src="img/icons/logo-pug.png">
+        <img src="/img/icons/logo-pug.png">
       </router-link>
     </div>
     <ul class="navbar">
