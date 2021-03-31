@@ -6,6 +6,7 @@ if ("serviceWorker" in navigator) {
     window.location.reload();
   });
   wb.register();
+  console.log("Service Worker Registered");
 } else {
   wb = null;
 }
