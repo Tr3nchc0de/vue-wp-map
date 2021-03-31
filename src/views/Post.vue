@@ -1,12 +1,12 @@
 <template>
   <div>
-    <img v-if="post.featured_image" :src="post.featured_image" />
+    <img style="width:100%" v-if="post.featured_image" :src="post.featured_image" />
     <article>
       <GmapMap
         :center="{ lat: 10, lng: 10 }"
         :zoom="12"
         map-type-id="terrain"
-        style="width: 500px; height: 300px"
+        style="width: 100%; height: 300px"
       >
         <GmapMarker @click="center = m.position" />
       </GmapMap>
