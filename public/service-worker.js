@@ -1,3 +1,5 @@
+/*https://developers.google.com/web/ilt/pwa/lab-caching-files-with-service-worker*/
+
 console.log('service-worker.js loaded');
 
 const filesToCache = [

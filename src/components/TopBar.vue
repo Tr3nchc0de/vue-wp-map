@@ -27,6 +27,7 @@
       <div class="nav-item">Suche</div>
       </router-link>
       </li>
+      <li><div id="btn-install" class="nav-item btn-install">installieren</div></li>
     </ul>
 
     <div>
@@ -92,6 +93,11 @@ nav {
   }
 }
 
+ul.navbar {
+    display: flex;
+    align-items: center;
+}
+
 div {
   display: flex;
   align-items: center;
@@ -105,6 +111,18 @@ div {
 button {
   @include media($mobile) {
     margin: 0 0 0 1rem;
+  }
+}
+
+.btn-install{
+  background: $green;
+  border-radius: .4em;
+  padding: 5px 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: all .4s ease-in-out;
+  &:hover {
+    background: black;
   }
 }
 
