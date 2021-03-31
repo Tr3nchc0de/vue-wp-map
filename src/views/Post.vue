@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img style="width:100%" v-if="post.featured_image" :src="post.featured_image" />
+    <img class="featured-image" v-if="post.featured_image" :src="post.featured_image" />
     <article>
       <GmapMap
         :center="{ lat: 10, lng: 10 }"
@@ -119,6 +119,9 @@ article {
   @include media($small) {
     padding: 3rem;
   }
+}
+img.featured-image{
+  width: 100%;
 }
 
 header {
