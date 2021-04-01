@@ -3,31 +3,37 @@
     <div class="navbar-brand">
       <router-link
         :to="{
-          name: 'home'
+          name: 'start'
         }"
       >
         <img src="/img/icons/logo-pug.png">
       </router-link>
     </div>
     <ul class="navbar">
-      <li><router-link
+      <li>
+        <router-link
         :to="{
-          name: 'posts'
+          name: 'start'
         }"
       >
-      <div class="nav-item">Home</div>
+      <div class="nav-item">Start</div>
       </router-link>
       </li>
+
       <li>
       <router-link
         :to="{
-          name: ''
+          name: 'search'
         }"
       >
-      <div class="nav-item">Suche</div>
+      <div class="nav-item">Search</div>
       </router-link>
       </li>
-      <li><div id="btn-install" class="nav-item btn-install">installieren</div></li>
+
+      <li>
+        <div id="btn-install" class="nav-item btn-install">installieren</div>
+      </li>
+
     </ul>
 
     <div>

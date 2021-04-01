@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Feed from "./views/Feed";
+import Start from "./views/Start";
+import Search from "./views/Search";
 import FourOFour from "./views/FourOFour";
 import Post from "./views/Post";
 import bus from "./bus";
@@ -12,6 +14,16 @@ const routes = [
     name: "home",
     path: "/",
     redirect: "/posts"
+  },
+  {
+    name: "start",
+    path: "/start",
+    component: Start
+  },
+  {
+    name: "search",
+    path: "/search",
+    component: Search
   },
   {
     name: "posts",
