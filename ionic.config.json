@@ -1,0 +1,7 @@
+{
+  "name": "vue-wp-map",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}

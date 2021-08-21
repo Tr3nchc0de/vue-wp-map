@@ -1,21 +1,16 @@
 <template>
   <div>
-   
     <section>
       <!-- <p>
         WP Vue is a simple template built with Vue JS that displays posts from a WordPress REST API endpoint.
         Take what you see here &amp; rip it apart to suit your needs. To improve it for everyone else, <a href="https://www.github.com/alexmacarthur/wp-vue">contribute on Github</a>.
       </p> -->
     </section>
-    <slider/>
+    <slider />
 
     <h2>Übersicht</h2>
     <ul>
-      <Card
-        v-for="post in posts"
-        :post="post"
-        :key="post.id"
-      />
+      <Card v-for="post in posts" :post="post" :key="post.id" />
     </ul>
 
     <Pagination
@@ -23,51 +18,53 @@
       :totalPages="parseInt(totalPages)"
     ></Pagination>
 
+    <FooterMenu></FooterMenu>
   </div>
 </template>
 
 <script>
-import bus from '../bus';
-import ajax from '../mixins/ajax';
-import Card from '../components/Card';
-import Pagination from '../components/Pagination';
-import Slider from '../components/Slider.vue';
+import bus from "../bus";
+import ajax from "../mixins/ajax";
+import Card from "../components/Card";
+import Pagination from "../components/Pagination";
+import Slider from "../components/Slider.vue";
+import FooterMenu from "../components/FooterMenu.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
 
   mixins: [ajax],
 
-  data () {
+  data() {
     return {
       posts: [],
       page: 1,
       totalPages: null
-    }
+    };
   },
 
-  mounted: function () {
+  mounted: function() {
     this.getPosts();
   },
 
-  created: function () {
-    if(this.$route.name === 'page') {
+  created: function() {
+    if (this.$route.name === "page") {
       this.page = this.$route.params.page;
     }
   },
 
   methods: {
-    getPosts: async function () {
+    getPosts: async function() {
       let response;
 
       try {
         response = await this.get(
           `/posts?per_page=${POSTS_PER_PAGE}&page=${this.page}`
         );
-        this.totalPages = response.headers['x-wp-totalpages'];
+        this.totalPages = response.headers["x-wp-totalpages"];
       } catch (error) {
-        bus.$emit('showUpdater', 'Are you sure that\'s a valid endpoint?');
-        bus.$emit('toggleLoading', false);
+        bus.$emit("showUpdater", "Are you sure that's a valid endpoint?");
+        bus.$emit("toggleLoading", false);
         return;
       }
 
@@ -75,18 +72,16 @@ export default {
 
       this.getAdjacentPageData();
 
-      bus.$emit('toggleLoading', false);
+      bus.$emit("toggleLoading", false);
     },
 
-    getAdjacentPageData: async function (prevPage = false) {
-
-      let page = prevPage === true
-              ? parseInt(this.page) - 1
-              : parseInt(this.page) + 1;
+    getAdjacentPageData: async function(prevPage = false) {
+      let page =
+        prevPage === true ? parseInt(this.page) - 1 : parseInt(this.page) + 1;
 
       let response;
 
-      if(page > 0) {
+      if (page > 0) {
         try {
           response = await this.get(
             `/posts?per_page=${POSTS_PER_PAGE}&page=${page}`
@@ -95,33 +90,31 @@ export default {
           console.error(error);
         }
 
-        response.data.forEach((post) => {
-          if(post.featured_media <= 0) return;
+        response.data.forEach(post => {
+          if (post.featured_media <= 0) return;
           this.get(`/media/${post.featured_media}`);
         });
       }
 
-      if(!prevPage) {
+      if (!prevPage) {
         this.getAdjacentPageData(true);
       }
     },
 
-    getFeaturedImages: function (posts) {
-      return new Promise((resolve) => {
-        let requests = posts.map((post) => {
-          return new Promise( async (resolve) => {
+    getFeaturedImages: function(posts) {
+      return new Promise(resolve => {
+        let requests = posts.map(post => {
+          return new Promise(async resolve => {
             let response;
 
             try {
-
-              if(post.featured_media <= 0) {
+              if (post.featured_media <= 0) {
                 throw "No featured image.";
               }
 
-              response = await this.get(
-                `/media/${post.featured_media}`
-              );
-              post.featured_image = response.data.media_details.sizes['medium'].source_url;
+              response = await this.get(`/media/${post.featured_media}`);
+              post.featured_image =
+                response.data.media_details.sizes["medium"].source_url;
             } catch (error) {
               post.featured_image = null;
             }
@@ -130,7 +123,7 @@ export default {
           });
         });
 
-        Promise.all(requests).then((posts) => resolve(posts));
+        Promise.all(requests).then(posts => resolve(posts));
       });
     }
   },
@@ -138,26 +131,26 @@ export default {
   components: {
     Card,
     Pagination,
-    Slider
+    Slider,
+    FooterMenu
   }
-}
-
+};
 </script>
 
 <style scoped lang="scss">
+section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
 
-  section {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 3rem;
-  }
-
-  ul {
-    display: grid;
-    grid-template-columns: repeat( auto-fit, minmax( 320px, auto ) );
-    grid-gap: 1rem;
-  }
-  h2{text-align: center;
-  padding: 20px 0;}
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, auto));
+  grid-gap: 1rem;
+}
+h2 {
+  text-align: center;
+  padding: 20px 0;
+}
 </style>
-

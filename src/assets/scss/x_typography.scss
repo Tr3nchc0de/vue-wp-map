@@ -1,9 +1,3 @@
-@font-face {
-  font-family: "droid_serifregular";
-  src: url("/fonts/DroidSerif-Regular-webfont.woff") format("woff"),
-    url("/fonts/DroidSerif-Regular-webfont.ttf") format("truetype");
-}
-
 html {
   color: $base-font-color;
   font-family: $base-font-family;

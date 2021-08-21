@@ -1,18 +1,30 @@
 <template>
   <div>
-    <img class="featured-image" v-if="post.featured_image" :src="post.featured_image" />
+    <img
+      class="featured-image"
+      v-if="post.featured_image"
+      :src="post.featured_image"
+    />
     <article>
       <GmapMap
-        :center="{ lat: 10, lng: 10 }"
-        :zoom="12"
+        id="map"
+        :center="center"
+        :zoom="8"
         map-type-id="terrain"
         style="width: 100%; height: 300px"
       >
-        <GmapMarker @click="center = m.position" />
+        <GmapMarker
+          @click="center = m.position"
+          class="marker-main"
+          :position="center"
+        />
       </GmapMap>
+
       <a @click="goBack">Back to All Posts</a>
 
       <header>
+        <div v-if="post.featured_image"></div>
+
         <h1 v-html="title"></h1>
 
         <ul>
@@ -23,7 +35,10 @@
             <span>
               <a :href="link">View Post at Source</a>
             </span>
-            <span class="meta">{{ metadata }}</span>
+            <span class="meta"
+              >{{ metadata }}
+              <div class="lat_long">{{ map_latitude }}</div></span
+            >
           </li>
         </ul>
       </header>
@@ -54,10 +69,19 @@ export default {
       content: "",
       featured_image: "",
       metadata: "",
+      long_lat: "",
+      map_longitude: "",
+      map_latitude: "",
+      /* center: { lat: this.post.map_latitude, lng: this.post.map_longitude }, */
+      center: { lat: 45.508, lng: -73.587 },
+      marker: {
+        lat: 45.508,
+        lng: -73.587
+      }
     };
   },
 
-  created: async function () {
+  created: async function() {
     this.post = await this.setPost();
     this.link = this.post.link;
     this.author = this.post.author;
@@ -66,13 +90,20 @@ export default {
     this.content = this.post.content.rendered;
     this.featured_image = await this.getFeaturedImage(this.post.featured_media);
     this.metadata = this.post.metadata;
-
+    this.map_longitude = this.post.map_longitude;
+    this.map_latitude = this.post.map_latitude;
+    this.center = {
+      lat: +this.post.map_latitude,
+      lng: +this.post.map_longitude
+    };
     bus.$emit("toggleLoading", false);
   },
 
+  computed: {},
+
   methods: {
-    setPost: function () {
-      return new Promise(async (resolve) => {
+    setPost: function() {
+      return new Promise(async resolve => {
         let response;
 
         try {
@@ -86,7 +117,7 @@ export default {
       });
     },
 
-    getFeaturedImage: async function (id) {
+    getFeaturedImage: async function(id) {
       let response;
       try {
         if (post.featured_media <= 0) {
@@ -99,12 +130,12 @@ export default {
       }
 
       return response.data.media_details.sizes["medium"].source_url;
-    },
+    }
   },
 
   components: {
-    PostBody,
-  },
+    PostBody
+  }
 };
 </script>
 
@@ -120,7 +151,7 @@ article {
     padding: 3rem;
   }
 }
-img.featured-image{
+img.featured-image {
   width: 100%;
 }
 

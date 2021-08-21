@@ -25,7 +25,7 @@ import Card from "../components/Card";
 import Pagination from "../components/Pagination";
 
 export default {
-  name: "Feed",
+  name: "List",
 
   mixins: [ajax],
 

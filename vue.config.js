@@ -12,7 +12,7 @@ module.exports = {
   runtimeCompiler: true,
   pwa: {
     workboxPluginMode: "InjectManifest",
-    workboxOptions:{
+    workboxOptions: {
       swSrc: "service-worker.js"
     },
     themeColor: "#42b983",
@@ -32,7 +32,13 @@ module.exports = {
     }
   },
   configureWebpack: {
-    plugins: [new webpack.DefinePlugin(CONSTANTS)],
-    
+    plugins: [new webpack.DefinePlugin(CONSTANTS)]
+    /* devServer: {
+      open: process.platform === 'darwin',
+      host: '0.0.0.0',
+      port: 8085, // CHANGE YOUR PORT HERE!
+      https: true,
+      hotOnly: false,
+    }, */
   }
 };

@@ -1,14 +1,12 @@
 <template>
   <div>
     <section>
-      <!-- <p>
-        WP Vue is a simple template built with Vue JS that displays posts from a WordPress REST API endpoint.
-        Take what you see here &amp; rip it apart to suit your needs. To improve it for everyone else, <a href="https://www.github.com/alexmacarthur/wp-vue">contribute on Github</a>.
-      </p> -->
+      <SearchBar v-model="filter"></SearchBar>
+      <!-- <SelectBar v-model="select"></SelectBar> -->
     </section>
 
     <ul>
-      <Card v-for="post in posts" :post="post" :key="post.id" />
+      <Card v-for="post in filteredPosts" :post="post" :key="post.id" />
     </ul>
 
     <Pagination
@@ -21,11 +19,13 @@
 <script>
 import bus from "../bus";
 import ajax from "../mixins/ajax";
-import Card from "../components/Card";
+import SearchBar from "../components/SearchBar.vue";
+/* import SelectBar from "../components/SelectBar.vue"; */
+import Card from "../components/Card.vue";
 import Pagination from "../components/Pagination";
 
 export default {
-  name: "Feed",
+  name: "SearchPage",
 
   mixins: [ajax],
 
@@ -34,8 +34,7 @@ export default {
       posts: [],
       page: 1,
       totalPages: null,
-      map_longitude: 1,
-      map_latitude: 1
+      filteredPosts
     };
   },
 
@@ -46,6 +45,14 @@ export default {
   created: function() {
     if (this.$route.name === "page") {
       this.page = this.$route.params.page;
+    }
+  },
+  computed: {
+    filteredPosts: function() {
+      return this.posts.filter(post => {
+        console.log("loggin");
+        return post /* .posts.match(this.post) */;
+      });
     }
   },
 
@@ -83,7 +90,7 @@ export default {
             `/posts?per_page=${POSTS_PER_PAGE}&page=${page}`
           );
         } catch (error) {
-          console.error(error);
+          /* console.error(error); */
         }
 
         response.data.forEach(post => {
@@ -121,12 +128,17 @@ export default {
 
         Promise.all(requests).then(posts => resolve(posts));
       });
+    },
+    filterPosts: function() {
+      console.log(this.posts);
     }
   },
 
   components: {
+    Pagination,
     Card,
-    Pagination
+    SearchBar
+    /*  SelectBar, */
   }
 };
 </script>
@@ -134,8 +146,20 @@ export default {
 <style scoped lang="scss">
 section {
   text-align: center;
-  max-width: 800px;
+  /*   max-width: 800px; */
   margin: 0 auto 3rem;
+}
+.search-wrapper {
+  margin: 100px 0 50px;
+  & input {
+    padding: 15px;
+  }
+}
+.form-search {
+  display: flex;
+  & input {
+    margin: 5px;
+  }
 }
 
 ul {

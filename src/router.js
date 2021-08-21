@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Feed from "./views/Feed";
 import Start from "./views/Start";
 import Search from "./views/Search";
+import Map from "./views/Map";
+import List from "./views/List";
 import FourOFour from "./views/FourOFour";
 import Post from "./views/Post";
 import bus from "./bus";
@@ -25,6 +27,17 @@ const routes = [
     path: "/search",
     component: Search
   },
+  {
+    name: "map",
+    path: "/map",
+    component: Map
+  },
+  {
+    name: "list",
+    path: "/list",
+    component: List
+  },
+
   {
     name: "posts",
     path: "/posts",
