@@ -1,38 +1,53 @@
 <template>
   <div>
-    <span>
-      <h2>
-        Sorry, that page doesn't exist.
-      </h2>
-      <button @click="goBack">Go Home</button>
-    </span>
+    <section>
+      <GmapMap
+        id="map"
+        :center="center"
+        :zoom="8"
+        map-type-id="terrain"
+        style="width: 100vw; height: 100vh"
+      >
+        <GmapMarker
+          @click="center = m.position"
+          class="marker-main"
+          :position="center"
+        />
+      </GmapMap>
+    </section>
   </div>
 </template>
 
 <script>
-import bus from "../bus";
+import ajax from "../mixins/ajax";
 
 export default {
-  name: "FourOFour",
+  name: "Map",
 
-  created: function() {
-    bus.$emit("toggleLoading", false);
+  mixins: [ajax],
+
+  data() {
+    return {
+      center: { lat: 45.508, lng: -73.587 },
+      marker: {
+        lat: 45.508,
+        lng: -73.587
+      }
+    };
   },
 
-  methods: {
-    goBack: function() {
-      this.$router.push("/posts");
-    }
-  }
+  components: {}
 };
 </script>
 
 <style scoped lang="scss">
-div {
+section {
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 4rem);
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, auto));
+  grid-gap: 1rem;
 }
 </style>

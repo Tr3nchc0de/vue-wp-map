@@ -138,12 +138,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-section {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 3rem;
-}
-
 ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, auto));
